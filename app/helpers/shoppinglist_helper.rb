@@ -1,0 +1,2 @@
+module ShoppinglistHelper
+end
