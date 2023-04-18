@@ -1,0 +1,50 @@
+<div class="recipes-container">
+<h1><%= @recipe.name %></h1>
+<%= button_to "Toggle", toggle_public_path(id: @recipe.id), method: :post  %>
+
+<div class="recipes-features">
+<p>Preparation Time: <%= @recipe.preparation_time %> hours</p>
+<p>Cooking Time: <%= @recipe.cooking_time %> hours</p>
+<!-- <p>Public: <%= @recipe.public? ? 'Yes' : 'No' %></p> -->
+
+<p>Steps to make the recipe</p>
+<% if params[:show_full].present? %>
+  <p>
+    <%= @recipe.description %>
+    <%= link_to 'Show less', recipe_path(show_full: nil) %>
+  </p>
+<% else %>
+  <p>
+    <%=  @recipe.description.split[0...50].join(' ') %>
+    <% if @recipe.description.split.size > 50 %>
+      <%= link_to 'Show more', recipe_path(show_full: true) %>
+    <% end %>
+  </p>
+<% end %>
+</div>
+
+<div class="back_food">
+<%= link_to "generate shooping list", shoppinglist_index_path(recipe_id: @recipe.id), class:"food_btn" %>
+</div>
+
+<div class="recipes-container">
+<% @recipe_foods.each do |recipe_food| %>
+  <div class="food">
+    <div><%= recipe_food.food.name %></div>
+    <div>Qty: <%= recipe_food.quantity %></div>
+    <div>Total Price: $<%= recipe_food.food.price * recipe_food.quantity %></div>
+    <div>
+      <div class="food_btn_spc"><%= link_to "Edit this food", edit_food_path %></div>
+      <div><%= button_to 'Remove', recipe_food_path(recipe_id: @recipe.id, id: recipe_food.id), method: :delete, class: 'remove_btn' %></div>
+    </div>
+  </div>
+<% end %>
+</div>
+
+<div class="list_btn">
+<button class="recipe_btn"><%= link_to 'Add ingredient', recipe_foods_path(recipe_id: @recipe.id) %></button>
+<button type="button" class="recipe_btn"><%= link_to "Go to public recipes", public_recipes_path %></button>
+<button class="recipe_btn"><%= link_to 'Edit', edit_recipe_path(id: @recipe.id), class: 'edit_btn' %></button>
+</div>
+
+</div>

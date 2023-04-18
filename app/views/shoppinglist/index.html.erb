@@ -1,0 +1,22 @@
+
+<div class="recipes-container">
+<h1>Shopping List</h1>
+
+  <div class="recipes-shopping">
+  Amount of food items to buy: <%= @total_foods %>
+  </div>
+
+
+  <% @recipe_foods.each do |recipe_food| %>
+    <div class="shoppinglist">
+      <div><%= recipe_food.food.name %> </div>
+      <div><%= recipe_food.quantity %><%= recipe_food.food.measurement_unit %></div>
+      <div>$<%= recipe_food.food.price*recipe_food.quantity %></div>
+    </div>
+  <% end %>
+
+  <div class="recipes-shopping">
+  Total value of food needed: $<%= @total_price %>
+  </div>
+
+</div>
