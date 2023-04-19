@@ -1,0 +1,19 @@
+<div class="recipes-container">
+<h1>Recipes</h1>
+  <% @recipes.each do |recipe| %>
+  <div class="recipe-card">
+    <div class="recipes-title">
+      <h2 class="recipe_name"><%= link_to recipe.name, recipe_path(id: recipe.id) %></h2>
+       <div class="list_btn">
+      <button type="button" class="remove_btn btn"><%= link_to "Remove", recipe_path(id: recipe.id), data: { turbo_method: :delete } %></button>
+    </div>
+    </div>
+    <div class="recipes-features">
+    <p class="recipe_desc"><%= truncate(recipe.description, length: 40, omission: "...") %></p>
+    </div>
+    </div>
+  <% end %>
+  <div class="list_btn">
+    <button class="recipe_btn"><%= link_to "Add Recipe", new_recipe_path %></button>
+  </div>
+</div>

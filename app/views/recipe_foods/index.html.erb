@@ -1,0 +1,46 @@
+<div class="recipes-container">
+<h1>Add Food</h1>
+
+<% if @food.present? %>
+  <h2>Add here the quantity for <%= @food.name %></h2>
+    <div class="recipes-features new_user">
+    <%= form_with model: @recipe_foods, url: recipe_foods_path(recipe_id: @recipe.id), local: true do |f| %>
+      <div>
+        <%= f.label :quantity, "Quantity" %>
+        <%= f.number_field :quantity, min: 0 %>
+      </div>
+      <%= f.hidden_field :food_id, value: @food.id %>
+      <%= f.submit "Add Ingredient", { class: "btn"} %>
+    <% end %>
+    <div class="back_food alert-">
+      <button class="food_btn">
+        <%= link_to 'Back to foods', recipe_foods_path(recipe_id: @recipe.id) %>
+      </button>
+    </div>
+
+    <% else %>
+  <h2><%= @foods.count %> foods item(s) are available in the store</h2>
+  <div class="list select_food">
+    <div class="list_food name title">Food</div>
+    <div class="list_food title">Quantity</div>
+    <div class="list_food title">Value</div>
+    <div class="list_food title">Actions</div>
+  </div>
+  <section id="foods">
+    <% @foods.each do |food| %>
+      <ul class="food recipe_foods">
+        <li><%= food.name %></li>
+        <li><%= food.measurement_unit %></li>
+        <li><%= food.price %></li>
+        <li><%= link_to image_tag("edit.png"), recipe_foods_path(recipe_id: @recipe.id, food_id: food.id) %></li>
+      </ul>
+    <% end %>
+  </section>
+  <duv class="back_food">
+    <button class="food_btn"><%= link_to 'Add new food', new_food_path(recipe_id: @recipe.id) %></button>
+    <button class="food_btn"><%= link_to 'Back to recipe', recipe_path(id: @recipe.id) %></button>
+  </duv>
+
+<% end %>
+
+</div>

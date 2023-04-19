@@ -1,0 +1,14 @@
+
+<div class="recipes-container">
+<p style="color: green"><%= notice %></p>
+
+<%= render @food %>
+
+<div>
+<div class="back_food">
+  <%= link_to "Edit this food", edit_food_path(@food), { class: "food_btn"} %>
+  <%= link_to "Back to foods", foods_path, { class: "food_btn"} %>
+</div>
+
+</div>
+</div>

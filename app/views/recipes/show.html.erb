@@ -1,0 +1,57 @@
+<div class="recipes-container">
+  <h1><%= @recipe.name %></h1>
+
+  <div class="toggle">
+    <%= button_to @recipe.public? ? 'Make private' : 'Make public', toggle_public_path(id: @recipe.id), method: :post, class: 'toggle_btn', form_class: 'toggle' %>
+  </div>
+
+  <div class="recipes-features">
+  <p class="time"><span>Preparation Time:</span><span><%= @recipe.preparation_time %> hours</span></p>
+  <p class="time"><span>Cooking Time:</span> <span><%= @recipe.cooking_time %> hours</span></p>
+
+  <p class="steps">Steps to make the recipe</p>
+  <% if params[:show_full].present? %>
+    <p class="description">
+      <%= @recipe.description %>
+      <%= link_to 'Show less', recipe_path(show_full: nil), class: 'show_more_btn' %>
+    </p>
+  <% else %>
+    <p class="description">
+      <%=  @recipe.description.split[0...50].join(' ') %>
+      <% if @recipe.description.split.size > 50 %>
+        <%= link_to 'Show more', recipe_path(show_full: true), class: 'show_less_btn' %>
+      <% end %>
+    </p>
+  <% end %>
+  </div>
+
+<div class="back_food_list_btn">
+    <div class="back_food">
+        <%= link_to "Generate shooping list", shoppinglist_index_path(recipe_id: @recipe.id), class:"food_btn" %>
+    </div>
+    <div class="list_btn">
+      <button class="recipe_btn"><%= link_to 'Add ingredient', recipe_foods_path(recipe_id: @recipe.id) %></button>
+    </div>
+ </div>
+
+  <div class="recipes-container recipes_container_list">
+    <div class="list">
+      <div class="list_food name title">Food</div>
+      <div class="list_food title">Quantity</div>
+      <div class="list_food title">Value</div>
+      <div class="list_food title">Actions</div>
+    </div>
+    <% @recipe_foods.each do |recipe_food| %>
+      <div class="food">
+        <p><%= recipe_food.food.name %></p>
+        <p><%= recipe_food.quantity %></p>
+        <p>$<%= recipe_food.food.price * recipe_food.quantity %></p>
+        <div>
+          <div class="food_btn_spc"><%= link_to image_tag("edit.png"),  edit_recipe_food_path(recipe_id: @recipe.id, id: recipe_food.id) %></div>
+          <div><%= button_to image_tag("remove.png"), recipe_food_path(recipe_id: @recipe.id, id: recipe_food.id), method: :delete, class: 'remove_btn' %></div>
+        </div>
+      </div>
+    <% end %>
+    </div>
+
+</div>

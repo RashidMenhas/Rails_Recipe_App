@@ -1,0 +1,33 @@
+<div class="recipes-container">
+<h1>New Recipe</h1>
+<div class="new_user">
+  <%= form_with model: @recipe, url: recipes_path, local: true do |f| %>
+    <div>
+      <%= f.label :name, 'Recipe name', style: "display: block" %>
+      <%= f.text_field :name, autofocus: true%>
+    </div>
+    <div>
+      <%= f.label :description, 'Description', style: "display: block" %>
+      <%= f.text_area :description, autofocus: true %>
+    </div>
+    <div>
+      <%= f.label :preparation_time, 'Preparation Time', style: "display: block"%>
+      <%= f.number_field :preparation_time, step: 0.5, autofocus: true %>
+    </div>
+    <div>
+      <%= f.label :cooking_time, 'Cooking Time', style: "display: block" %>
+      <%= f.number_field :cooking_time, step: 0.5, autofocus: true %>
+    </div>
+    <div>
+      <%= f.label :public, "Do you want to make it public?" %>
+      <%= f.check_box :public, autofocus: true%><br/>
+    </div>
+    <div class="back_food">
+      <%= f.submit "Create Recipe", class: "recipe_btn_gen" %>
+    </div>
+  <% end %>
+</div>
+  <div class="back_food">
+    <button type="button" class="food_btn"><%= link_to "Back to recipes", recipes_path %></button>
+  </div>
+</div>

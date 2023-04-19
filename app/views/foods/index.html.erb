@@ -1,0 +1,18 @@
+<div class="recipes-container">
+<h1>Foods</h1>
+
+<div id="foods">
+<div class="list_btn">
+<button class="recipe_btn"><%= link_to "Add food", new_food_path %></div>
+</div>
+  <div class="list">
+    <div class="list_food name title">Food</div>
+    <div class="list_food title">Measurement Unit</div>
+    <div class="list_food title">Unit Price</div>
+    <div class="list_food title">Actions</div>
+  </div>
+  <% @foods.each do |food| %>
+    <%= render food %>
+  <% end %>
+</div>
+</div>

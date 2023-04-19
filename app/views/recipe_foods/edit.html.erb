@@ -1,0 +1,16 @@
+<div class="recipes-container">
+  <h1>Edit Recipe Food Quantity</h1>
+  <h2>Current quantity value: <%= @recipe_food.quantity %></h2>
+  <div class="new_user">
+    <%= form_with scope: @recipe_foods, url: recipe_food_path(recipe_id: @recipe.id), method: :put, local: true do |f| %>
+  <div>
+    <%= f.label :quantity %>
+    <%= f.number_field :quantity, min: 0 %>
+  </div>
+  <%= f.submit 'Update food quantity', class: 'recipe_btn_gen' %>
+  <% end %>
+  </div>
+  <div class="back_food">
+    <button type="button" class="food_btn"><%= link_to "Back to recipe", recipe_path(id: @recipe.id) %></button>
+  </div>
+</div>
