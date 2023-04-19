@@ -82,7 +82,7 @@ Clone this repository to your desired folder:
 
 ```sh
   cd blog-app
-  git clone https://github.com/kaizipaul/recipe-app.git
+  git clone https://github.com/RashidMenhas/Rails_Recipe_App.git
 ```
 
 ### Install
